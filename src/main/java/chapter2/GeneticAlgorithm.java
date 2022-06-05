@@ -4,10 +4,10 @@ package chapter2;
  * Lots of comments in the source that are omitted here!
  */
 public class GeneticAlgorithm {
-    private int populationSize;
-    private double mutationRate;
-    private double crossoverRate;
-    private int elitismCount;
+    private final int populationSize;
+    private final double mutationRate;
+    private final double crossoverRate;
+    private final int elitismCount;
 
     public GeneticAlgorithm(int populationSize, double mutationRate, double
             crossoverRate, int elitismCount) {
@@ -21,9 +21,7 @@ public class GeneticAlgorithm {
      * Many more methods implemented later...
      */
     public Population initPopulation(int chromosomeLength) {
-        Population population = new Population(this.populationSize,
-                chromosomeLength);
-        return population;
+        return new Population(this.populationSize, chromosomeLength);
     }
 
     public double calcFitness(Individual individual) {
@@ -63,7 +61,7 @@ public class GeneticAlgorithm {
 
     public Individual selectParent(Population population) {
         // Get individuals
-        Individual individuals[] = population.getIndividuals();
+        Individual[] individuals = population.getIndividuals();
         // Spin roulette wheel
         double populationFitness = population.getPopulationFitness();
         double rouletteWheelPosition = Math.random() * populationFitness;

@@ -1,7 +1,7 @@
 package chapter2;
 
 public class Individual {
-    private int[] chromosome;
+    private final int[] chromosome;
     private double fitness = -1;
 
     public Individual(int[] chromosome) {
@@ -45,12 +45,12 @@ public class Individual {
     }
 
     public String toString() {
-        String output = "";
+        StringBuilder output = new StringBuilder();
 
-        for (int gene = 0; gene < this.chromosome.length; gene++) {
-            output += this.chromosome[gene];
+        for (int i : this.chromosome) {
+            output.append(i);
         }
-        return output;
+        return output.toString();
     }
 }
 
