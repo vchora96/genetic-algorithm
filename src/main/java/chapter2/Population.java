@@ -1,8 +1,12 @@
 package chapter2;
 
+import jdk.jfr.DataAmount;
+import lombok.Data;
+
 import java.util.Arrays;
 import java.util.Random;
 
+@Data
 public class Population {
     private final Individual[] population;
     private double populationFitness = -1;
@@ -21,10 +25,6 @@ public class Population {
         }
     }
 
-    public Individual[] getIndividuals() {
-        return this.population;
-    }
-
     public Individual getFittest(int offset) {
         Arrays.sort(this.population, (o1, o2) -> {
             if (o1.getFitness() > o2.getFitness()) {
@@ -38,34 +38,11 @@ public class Population {
         return this.population[offset];
     }
 
-    public void setPopulationFitness(double fitness) {
-        this.populationFitness = fitness;
-    }
-
-    public double getPopulationFitness() {
-        return this.populationFitness;
-    }
-
     public int size() {
         return this.population.length;
     }
 
     public void setIndividual(int offset, Individual individual) {
         population[offset] = individual;
-    }
-
-    public Individual getIndividual(int offset) {
-        return population[offset];
-    }
-
-    public void shuffle() {
-        Random rnd = new Random();
-        for (int i = population.length - 1; i > 0; i--) {
-            int index = rnd.nextInt(i + 1);
-
-            Individual a = population[index];
-            population[index] = population[i];
-            population[i] = a;
-        }
     }
 }

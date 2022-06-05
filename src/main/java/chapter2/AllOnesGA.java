@@ -6,7 +6,7 @@ public class AllOnesGA {
         GeneticAlgorithm ga = new GeneticAlgorithm(100, 0.01,
                 0.95, 2); // We’ll add a lot more here...
         // Initialize population
-        Population population = ga.initPopulation(9);
+        Population population = ga.initPopulation(40);
         // The following is the new code you should be adding:
         ga.evalPopulation(population);
         int generation = 1;

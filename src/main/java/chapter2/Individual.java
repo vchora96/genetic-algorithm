@@ -1,5 +1,8 @@
 package chapter2;
 
+import lombok.Data;
+
+@Data
 public class Individual {
     private final int[] chromosome;
     private double fitness = -1;
@@ -20,10 +23,6 @@ public class Individual {
         }
     }
 
-    public int[] getChromosome() {
-        return this.chromosome;
-    }
-
     public int getChromosomeLength() {
         return this.chromosome.length;
     }
@@ -34,14 +33,6 @@ public class Individual {
 
     public int getGene(int offset) {
         return this.chromosome[offset];
-    }
-
-    public void setFitness(double fitness) {
-        this.fitness = fitness;
-    }
-
-    public double getFitness() {
-        return this.fitness;
     }
 
     public String toString() {

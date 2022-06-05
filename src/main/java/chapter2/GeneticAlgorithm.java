@@ -44,14 +44,14 @@ public class GeneticAlgorithm {
 
     public void evalPopulation(Population population) {
         double populationFitness = 0;
-        for (Individual individual : population.getIndividuals()) {
+        for (Individual individual : population.getPopulation()) {
             populationFitness += calcFitness(individual);
         }
         population.setPopulationFitness(populationFitness);
     }
 
     public boolean isTerminationConditionMet(Population population) {
-        for (Individual individual : population.getIndividuals()) {
+        for (Individual individual : population.getPopulation()) {
             if (individual.getFitness() == 1) {
                 return true;
             }
@@ -61,7 +61,7 @@ public class GeneticAlgorithm {
 
     public Individual selectParent(Population population) {
         // Get individuals
-        Individual[] individuals = population.getIndividuals();
+        Individual[] individuals = population.getPopulation();
         // Spin roulette wheel
         double populationFitness = population.getPopulationFitness();
         double rouletteWheelPosition = Math.random() * populationFitness;
