@@ -1,6 +1,6 @@
-package chapter2;
+package ru.oshkin;
 
-public class AllOnesGA {
+public class BasicGA {
     public static void main(String[] args) {
         // Create GA object
         GeneticAlgorithm ga = new GeneticAlgorithm(100, 0.01,

@@ -1,18 +1,18 @@
-package chapter2;
+package ru.oshkin;
 
 import lombok.Data;
 
 @Data
-public class Individual {
+public class Person {
     private final int[] chromosome;
-    private double fitness = -1;
+    private double fitnessFunction = -1;
 
-    public Individual(int[] chromosome) {
+    public Person(int[] chromosome) {
         // Create individual chromosome
         this.chromosome = chromosome;
     }
 
-    public Individual(int chromosomeLength) {
+    public Person(int chromosomeLength) {
         this.chromosome = new int[chromosomeLength];
         for (int gene = 0; gene < chromosomeLength; gene++) {
             if (0.5 < Math.random()) {

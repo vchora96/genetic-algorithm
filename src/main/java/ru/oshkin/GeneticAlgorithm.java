@@ -1,4 +1,4 @@
-package chapter2;
+package ru.oshkin;
 
 /**
  * Lots of comments in the source that are omitted here!
@@ -24,57 +24,57 @@ public class GeneticAlgorithm {
         return new Population(this.populationSize, chromosomeLength);
     }
 
-    public double calcFitness(Individual individual) {
+    public double calcFitness(Person person) {
         // Track number of correct genes
         int correctGenes = 0;
         // Loop over individual's genes
-        for (int geneIndex = 0; geneIndex < individual.getChromosomeLength(); geneIndex++) {
+        for (int geneIndex = 0; geneIndex < person.getChromosomeLength(); geneIndex++) {
             // Add one fitness point for each "1" found
-            if (individual.getGene(geneIndex) == 1) {
+            if (person.getGene(geneIndex) == 1) {
                 correctGenes += 1;
             }
         }
 
         // Calculate fitness
-        double fitness = (double) correctGenes / individual.getChromosomeLength();
+        double fitness = (double) correctGenes / person.getChromosomeLength();
         // Store fitness
-        individual.setFitness(fitness);
+        person.setFitnessFunction(fitness);
         return fitness;
     }
 
     public void evalPopulation(Population population) {
         double populationFitness = 0;
-        for (Individual individual : population.getPopulation()) {
-            populationFitness += calcFitness(individual);
+        for (Person person : population.getPopulation()) {
+            populationFitness += calcFitness(person);
         }
         population.setPopulationFitness(populationFitness);
     }
 
     public boolean isTerminationConditionMet(Population population) {
-        for (Individual individual : population.getPopulation()) {
-            if (individual.getFitness() == 1) {
+        for (Person person : population.getPopulation()) {
+            if (person.getFitnessFunction() == 1) {
                 return true;
             }
         }
         return false;
     }
 
-    public Individual selectParent(Population population) {
+    public Person selectParent(Population population) {
         // Get individuals
-        Individual[] individuals = population.getPopulation();
+        Person[] people = population.getPopulation();
         // Spin roulette wheel
         double populationFitness = population.getPopulationFitness();
         double rouletteWheelPosition = Math.random() * populationFitness;
 
         // Find parent
         double spinWheel = 0;
-        for (Individual individual : individuals) {
-            spinWheel += individual.getFitness();
+        for (Person person : people) {
+            spinWheel += person.getFitnessFunction();
             if (spinWheel >= rouletteWheelPosition) {
-                return individual;
+                return person;
             }
         }
-        return individuals[population.size() - 1];
+        return people[population.size() - 1];
     }
 
     public Population crossoverPopulation(Population population) {
@@ -83,15 +83,15 @@ public class GeneticAlgorithm {
         // Loop over current population by fitness
         for (int populationIndex = 0; populationIndex < population.size();
              populationIndex++) {
-            Individual parent1 = population.getFittest(populationIndex);
+            Person parent1 = population.getFittest(populationIndex);
             // Apply crossover to this individual?
             if (this.crossoverRate > Math.random() && populationIndex >
                     this.elitismCount) {
                 // Initialize offspring
-                Individual offspring = new Individual(parent1.
+                Person offspring = new Person(parent1.
                         getChromosomeLength());
                 // Find second parent
-                Individual parent2 = selectParent(population);
+                Person parent2 = selectParent(population);
                 // Loop over genome
                 for (int geneIndex = 0; geneIndex < parent1.
                         getChromosomeLength(); geneIndex++) {
@@ -122,10 +122,10 @@ public class GeneticAlgorithm {
         // Loop over current population by fitness
         for (int populationIndex = 0; populationIndex < population.size();
              populationIndex++) {
-            Individual individual = population.
+            Person person = population.
                     getFittest(populationIndex);
             // Loop over individual's genes
-            for (int geneIndex = 0; geneIndex < individual.
+            for (int geneIndex = 0; geneIndex < person.
                     getChromosomeLength(); geneIndex++) {
                 // Skip mutation if this is an elite individual
                 if (populationIndex >= this.elitismCount) {
@@ -133,16 +133,16 @@ public class GeneticAlgorithm {
                     if (this.mutationRate > Math.random()) {
                         // Get new gene
                         int newGene = 1;
-                        if (individual.getGene(geneIndex) == 1) {
+                        if (person.getGene(geneIndex) == 1) {
                             newGene = 0;
                         }
                         // Mutate gene
-                        individual.setGene(geneIndex, newGene);
+                        person.setGene(geneIndex, newGene);
                     }
                 }
             }
             // Add individual to population
-            newPopulation.setIndividual(populationIndex, individual);
+            newPopulation.setIndividual(populationIndex, person);
         }
         // Return mutated population
         return newPopulation;
