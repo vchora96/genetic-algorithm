@@ -83,7 +83,7 @@ public class GeneticAlgorithm {
         // Loop over current population by fitness
         for (int populationIndex = 0; populationIndex < population.size();
              populationIndex++) {
-            Person parent1 = population.getFittest(populationIndex);
+            Person parent1 = population.getBest(populationIndex);
             // Apply crossover to this individual?
             if (this.crossoverRate > Math.random() && populationIndex >
                     this.elitismCount) {
@@ -105,11 +105,11 @@ public class GeneticAlgorithm {
                     }
                 }
                 // Add offspring to new population
-                newPopulation.setIndividual(populationIndex,
+                newPopulation.setPerson(populationIndex,
                         offspring);
             } else {
                 // Add individual to new population without applying crossover
-                newPopulation.setIndividual
+                newPopulation.setPerson
                         (populationIndex, parent1);
             }
         }
@@ -123,7 +123,7 @@ public class GeneticAlgorithm {
         for (int populationIndex = 0; populationIndex < population.size();
              populationIndex++) {
             Person person = population.
-                    getFittest(populationIndex);
+                    getBest(populationIndex);
             // Loop over individual's genes
             for (int geneIndex = 0; geneIndex < person.
                     getChromosomeLength(); geneIndex++) {
@@ -142,7 +142,7 @@ public class GeneticAlgorithm {
                 }
             }
             // Add individual to population
-            newPopulation.setIndividual(populationIndex, person);
+            newPopulation.setPerson(populationIndex, person);
         }
         // Return mutated population
         return newPopulation;

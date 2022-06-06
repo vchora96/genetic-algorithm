@@ -23,7 +23,7 @@ public class Population {
         }
     }
 
-    public Person getFittest(int offset) {
+    public Person getBest(int offset) {
         Arrays.sort(this.population, new PersonComparator());
         return this.population[offset];
     }
@@ -32,7 +32,7 @@ public class Population {
         return this.population.length;
     }
 
-    public void setIndividual(int offset, Person person) {
+    public void setPerson(int offset, Person person) {
         population[offset] = person;
     }
 }
