@@ -24,7 +24,7 @@ public class GeneticAlgorithm {
         return new Population(this.populationSize, chromosomeLength);
     }
 
-    public double calcFitness(Person person) {
+    public double calculateFitnessFunction(Person person) {
         // Track number of correct genes
         int correctGenes = 0;
         // Loop over individual's genes
@@ -42,15 +42,15 @@ public class GeneticAlgorithm {
         return fitness;
     }
 
-    public void evalPopulation(Population population) {
+    public void evaluatePopulation(Population population) {
         double populationFitness = 0;
         for (Person person : population.getPopulation()) {
-            populationFitness += calcFitness(person);
+            populationFitness += calculateFitnessFunction(person);
         }
         population.setPopulationFitness(populationFitness);
     }
 
-    public boolean isTerminationConditionMet(Population population) {
+    public boolean isShouldStop(Population population) {
         for (Person person : population.getPopulation()) {
             if (person.getFitnessFunction() == 1) {
                 return true;
