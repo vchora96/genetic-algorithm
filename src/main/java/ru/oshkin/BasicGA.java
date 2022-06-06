@@ -12,7 +12,7 @@ public class BasicGA {
         int generation = 1;
         while (!ga.isTerminationConditionMet(population)) {
             // Print fittest individual from population
-            System.out.println("Best solution: " + population.
+            System.out.println("Лучшее решение: " + population.
                     getFittest(0).toString());
             // Apply crossover
             population = ga.crossoverPopulation(population);
@@ -24,7 +24,7 @@ public class BasicGA {
             // Increment the current generation
             generation++;
         }
-        System.out.println("Found solution in " + generation + " generations");
-        System.out.println("Best solution: " + population.getFittest(0).toString());
+        System.out.println("Решение найдено за " + generation + " поколение(ий)");
+        System.out.println("Лучшее решение: " + population.getFittest(0).toString());
     }
 }
