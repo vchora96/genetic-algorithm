@@ -3,13 +3,13 @@ package ru.oshkin;
 /**
  * Lots of comments in the source that are omitted here!
  */
-public class GeneticAlgorithm {
+public class GeneticAlgorithmHelper {
     private final int populationSize;
     private final double mutationRate;
     private final double crossoverRate;
     private final int elitismCount;
 
-    public GeneticAlgorithm(int populationSize, double mutationRate, double
+    public GeneticAlgorithmHelper(int populationSize, double mutationRate, double
             crossoverRate, int elitismCount) {
         this.populationSize = populationSize;
         this.mutationRate = mutationRate;
@@ -59,7 +59,7 @@ public class GeneticAlgorithm {
         return false;
     }
 
-    public Person selectParent(Population population) {
+    public Person chooseParent(Population population) {
         // Get individuals
         Person[] people = population.getPopulation();
         // Spin roulette wheel
@@ -81,17 +81,17 @@ public class GeneticAlgorithm {
         // Create new population
         Population newPopulation = new Population(population.size());
         // Loop over current population by fitness
-        for (int populationIndex = 0; populationIndex < population.size();
-             populationIndex++) {
-            Person parent1 = population.getBest(populationIndex);
+        for (int i = 0; i < population.size();
+             i++) {
+            Person parent1 = population.getBest(i);
             // Apply crossover to this individual?
-            if (this.crossoverRate > Math.random() && populationIndex >
+            if (this.crossoverRate > Math.random() && i >
                     this.elitismCount) {
                 // Initialize offspring
                 Person offspring = new Person(parent1.
                         getChromosomeLength());
                 // Find second parent
-                Person parent2 = selectParent(population);
+                Person parent2 = chooseParent(population);
                 // Loop over genome
                 for (int geneIndex = 0; geneIndex < parent1.
                         getChromosomeLength(); geneIndex++) {
@@ -105,12 +105,12 @@ public class GeneticAlgorithm {
                     }
                 }
                 // Add offspring to new population
-                newPopulation.setPerson(populationIndex,
+                newPopulation.setPerson(i,
                         offspring);
             } else {
                 // Add individual to new population without applying crossover
                 newPopulation.setPerson
-                        (populationIndex, parent1);
+                        (i, parent1);
             }
         }
         return newPopulation;
